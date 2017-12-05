@@ -1,0 +1,25 @@
+version: '2'
+services:
+    mongodata: 
+        image: mongo
+        volumes:
+        - /data/configdb
+        entrypoint: /bin/bash
+    mongo:
+        image: mongo
+        depends_on: 
+            - mongodata
+        volumes_from:
+            - mongodata
+        ports:
+            - "27017"
+    web:
+        image: logisticautomation
+        depends_on: 
+            - mongo
+        environment:
+             MONGODB_DB_NAME: logisticautomation
+        ports:
+            - 8080:8080
+        links:
+            - mongo
