@@ -7,5 +7,5 @@ import com.Application.Model.Node;
 
 @Repository
 public interface NodeRepository extends MongoRepository<Node, Long>{
-	
+	Node findByNodeName(String name);
 }
